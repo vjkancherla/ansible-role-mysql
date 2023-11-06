@@ -81,8 +81,11 @@
   tags: ['skip_ansible_galaxy']
 
 - name: Ensure MySQL is started and enabled on boot.
-  ansible.builtin.service:
-    name: "{{ mysql_daemon }}"
-    state: started
-    enabled: "{{ mysql_enabled_on_startup }}"
-  register: mysql_service_configuration
+  block:
+    - name: Stop MySQL using init script
+      command: /etc/init.d/mysql stop
+      ignore_errors: yes # Ignore errors in case MySQL is not running
+
+    - name: Start MySQL using init script
+      command: /etc/init.d/mysql start
+  # register: mysql_service_configuration

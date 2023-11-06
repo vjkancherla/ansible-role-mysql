@@ -2,9 +2,15 @@
 extends: default
 
 rules:
-  line-length:
-    max: 160
-    level: warning
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  line-length: disable
+  truthy: disable
 
 ignore: |
-  .github/workflows/stale.yml
+  .tox/
+  .cache/

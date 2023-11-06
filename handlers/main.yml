@@ -1,6 +1,5 @@
 ---
+
+# The below is required to work on K8s Pods
 - name: restart mysql
-  ansible.builtin.service:
-    name: "{{ mysql_daemon }}"
-    state: restarted
-    sleep: 5
+  include_tasks: tasks/handler_tasks.yaml

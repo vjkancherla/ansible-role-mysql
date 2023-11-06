@@ -1,0 +1,14 @@
+---
+# The below is required to work on K8s Pods
+- name: Restart mysql server on K8s Pod
+  block:
+    - name: Print a message
+      ansible.builtin.debug:
+        msg: "This is the custom \"Restart mysql server\" Handler code"
+
+    - name: Stop MySQL using init script
+      command: /etc/init.d/mysql stop
+      ignore_errors: yes # Ignore errors in case MySQL is not running
+
+    - name: Start MySQL using init script
+      command: /etc/init.d/mysql start
